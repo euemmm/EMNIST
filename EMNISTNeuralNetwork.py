@@ -1,7 +1,7 @@
-import cupy as np
+import numpy as np
 import gzip
-import pandas as pd
-from PIL import Image, ImageOps
+# import pandas as pd
+# from PIL import Image, ImageOps
 import matplotlib.pyplot as plt
 
 def plot_data(train_image, train_label, index):
@@ -67,6 +67,7 @@ def init_test_data():
 
 	return test_images.T/255, test_label, test_image_num_images
 
+
 '''
 Activation Functions
 '''
@@ -81,6 +82,10 @@ def softmax(array):
 
 def tanh(array):
 	return np.tanh(array)
+'''
+---------------------
+'''
+
 
 def init_params():
 	'''
@@ -105,19 +110,19 @@ def init_params():
 			2D array of weightsN
 			1D array of biasesN
 	'''
-	weights1 = np.random.rand(250, 784) *  2 - 1
-	biases1 = np.random.rand(250, 1) *  2 - 1
+	weights1 = np.random.rand(84, 784) *  2 - 1
+	biases1 = np.random.rand(84, 1) *  2 - 1
 
-	weights2 = np.random.rand(250, 250) *  2 - 1
-	biases2 = np.random.rand(250, 1) *  2 - 1
+	weights2 = np.random.rand(83, 84) *  2 - 1
+	biases2 = np.random.rand(83, 1) *  2 - 1
 
-	weights3 = np.random.rand(250, 250) *  2 - 1
-	biases3 = np.random.rand(250, 1) *  2 - 1
+	weights3 = np.random.rand(81, 83) *  2 - 1
+	biases3 = np.random.rand(81, 1) *  2 - 1
 
-	weights4 = np.random.rand(250, 250) *  2 - 1
-	biases4 = np.random.rand(250, 1) *  2 - 1
+	weights4 = np.random.rand(80, 81) *  2 - 1
+	biases4 = np.random.rand(80, 1) *  2 - 1
 
-	weights5 = np.random.rand(62, 250) *  2 - 1
+	weights5 = np.random.rand(62, 80) *  2 - 1
 	biases5 = np.random.rand(62, 1) *  2 - 1
 	
 	return weights1, biases1, weights2, biases2, weights3, biases3, weights4, biases4, weights5, biases5
@@ -156,16 +161,16 @@ def forward_propagation(image, activation, weights1, biases1, weights2, biases2,
 	node1 = sigmoid(network1)
 
 	network2 = weights2.dot(node1) + biases2
-	node2 = sigmoid(network2)
+	node2 = ReLU(network2)
 
 	network3 = weights3.dot(node2) + biases3
-	node3 = sigmoid(network3)
+	node3 = ReLU(network3)
 
 	network4 = weights4.dot(node3) + biases4
 	node4 = sigmoid(network4)
 
 	network5 = weights5.dot(node4) + biases5
-	node5 = softmax(network5)
+	node5 = softmax(network5) #THIS LAST NODE's ACTIVATION FUNCTION NEEDS TO BE SOFTMAX
 
 	return network1, node1, network2, node2, network3, node3, network4, node4, network5, node5
 
@@ -184,6 +189,7 @@ def expected_result(label):
 
 	return result
 
+
 '''
 Derivative of Activation Functions
 '''
@@ -192,6 +198,10 @@ def ReLU_Derivative(array):
 
 def Sigmoid_derivative(array):
 	return np.exp(-array) / (np.exp(-array) + 1) ** 2
+'''
+-----------------------------------
+'''
+
 
 def back_propagation(image, label, deriv_activation, weights1, network1, node1, weights2, network2, node2, weights3, network3, node3, weights4, network4, node4, weights5, network5, node5):
 	'''
@@ -226,11 +236,11 @@ def back_propagation(image, label, deriv_activation, weights1, network1, node1, 
 	dW4 = 1 / num_images * dX4.dot(node3.T)
 	dB4 = 1 / num_images * np.sum(dX4)
 
-	dX3 = weights4.T.dot(dX4) * Sigmoid_derivative(network3)
+	dX3 = weights4.T.dot(dX4) * ReLU_Derivative(network3)
 	dW3 = 1 / num_images * dX3.dot(node2.T)
 	dB3 = 1 / num_images * np.sum(dX3)
 
-	dX2 = weights3.T.dot(dX3) * Sigmoid_derivative(network2)
+	dX2 = weights3.T.dot(dX3) * ReLU_Derivative(network2)
 	dW2 = 1 / num_images * dX2.dot(node1.T)
 	dB2 = 1 / num_images * np.sum(dX2)
 
@@ -285,6 +295,10 @@ def get_accuracy(prediction, label):
 	return asdf / label.size
 
 def gradient_descent(image, label, num_iterations, learning_curve):
+	'''
+	This is basically where the actual training happens
+	Make sure the weights, biases, networks, nodes, derivatives of each are updated according to your decision of model
+	'''
 
 	weights1, biases1, weights2, biases2, weights3, biases3, weights4, biases4, weights5, biases5 = init_params()
 
@@ -304,10 +318,15 @@ def gradient_descent(image, label, num_iterations, learning_curve):
 	return weights1, biases1, weights2, biases2, weights3, biases3, weights4, biases4, weights5, biases5
 
 def train():
+	'''
+	running this will start the training
+	once the training is done, it will save the resulting parameters
+	move them into folders, change the folder name so its distinguishable, add readme.txt about the model and thats it!
+	'''
 
 	train_image, train_label, train = init_train_data()
 
-	weights1, biases1, weights2, biases2, weights3, biases3, weights4, biases4, weights5, biases5 = gradient_descent(train_image, train_label, 50000, 0.25)
+	weights1, biases1, weights2, biases2, weights3, biases3, weights4, biases4, weights5, biases5 = gradient_descent(train_image, train_label, 5000, 0.1)
 
 	np.save("EMNIST/W1", weights1)
 	np.save("EMNIST/B1", biases1)
@@ -320,4 +339,4 @@ def train():
 	np.save("EMNIST/W5", weights5)
 	np.save("EMNIST/B5", biases5)
 
-train()
+train() #if you get rid of this, nothing will happen
