@@ -2,9 +2,9 @@ import numpy as np
 import gzip
 # import pandas as pd
 # from PIL import Image, ImageOps
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import cv2
-import imutils
+# import time
 
 def plot_data(train_image, train_label, index):
 
@@ -383,94 +383,115 @@ def forward_prop_4(image, weights1, biases1, weights2, biases2, weights3, biases
 
 def test(test_image):
 
-	test_image, test_label, test = init_test_data()
+	# test_image, test_label, test = init_test_data()
 
-	tmp = test_image
+	# tmp = test_image
 	# print(test_image.shape)
 	# print(test_image)
 	# print(test_image.T[1].T.shape)
 	# print(np.array([test_image.T[0]]))
 
-	test_image = np.array([test_image.T[2]]).T
+	# test_image = np.array([test_image.T[2]]).T
 
-	AW1 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/W1.npy")
-	AB1 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/B1.npy")
-	AW2 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/W2.npy")
-	AB2 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/B2.npy")
-	AW3 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/W3.npy")
-	AB3 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/B3.npy")
-	AW4 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/W4.npy")
-	AB4 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/B4.npy")
-	AW5 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/W5.npy")
-	AB5 = np.load("EMNIST/100S-100R-100S-100S-62SM_76%/B5.npy")
+	AW1 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/W1.npy")
+	AB1 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/B1.npy")
+	AW2 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/W2.npy")
+	AB2 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/B2.npy")
+	AW3 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/W3.npy")
+	AB3 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/B3.npy")
+	AW4 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/W4.npy")
+	AB4 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/B4.npy")
+	AW5 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/W5.npy")
+	AB5 = np.load("EMNIST/EMNIST/100S-100R-100S-100S-62SM_76%/B5.npy")
 	
 	A_network1, A_node1, A_network2, A_node2, A_network3, A_node3, A_network4, A_node4, A_network5, A_node5 = forward_prop_5(test_image, AW1, AB1, AW2, AB2, AW3, AB3, AW4, AB4, AW5, AB5, sigmoid, ReLU, sigmoid, sigmoid)
 
-	BW1 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/W1.npy")
-	BB1 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/B1.npy")
-	BW2 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/W2.npy")
-	BB2 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/B2.npy")
-	BW3 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/W3.npy")
-	BB3 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/B3.npy")
-	BW4 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/W4.npy")
-	BB4 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/B4.npy")
-	BW5 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/W5.npy")
-	BB5 = np.load("EMNIST/120S-110R-100S-90R-62SM_77%/B5.npy")
+	BW1 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/W1.npy")
+	BB1 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/B1.npy")
+	BW2 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/W2.npy")
+	BB2 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/B2.npy")
+	BW3 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/W3.npy")
+	BB3 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/B3.npy")
+	BW4 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/W4.npy")
+	BB4 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/B4.npy")
+	BW5 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/W5.npy")
+	BB5 = np.load("EMNIST/EMNIST/120S-110R-100S-90R-62SM_77%/B5.npy")
 
 	B_network1, B_node1, B_network2, B_node2, B_network3, B_node3, B_network4, B_node4, B_network5, B_node5 = forward_prop_5(test_image, BW1, BB1, BW2, BB2, BW3, BB3, BW4, BB4, BW5, BB5, sigmoid, ReLU, sigmoid, ReLU)
 
-	CW1 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/W1.npy")
-	CB1 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/B1.npy")
-	CW2 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/W2.npy")
-	CB2 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/B2.npy")
-	CW3 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/W3.npy")
-	CB3 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/B3.npy")
-	CW4 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/W4.npy")
-	CB4 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/B4.npy")
-	CW5 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/W5.npy")
-	CB5 = np.load("EMNIST/120S-130R-150S-120R-62SM_75%/B5.npy")
+	CW1 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/W1.npy")
+	CB1 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/B1.npy")
+	CW2 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/W2.npy")
+	CB2 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/B2.npy")
+	CW3 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/W3.npy")
+	CB3 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/B3.npy")
+	CW4 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/W4.npy")
+	CB4 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/B4.npy")
+	CW5 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/W5.npy")
+	CB5 = np.load("EMNIST/EMNIST/120S-130R-150S-120R-62SM_75%/B5.npy")
 
 	C_network1, C_node1, C_network2, C_node2, C_network3, C_node3, C_network4, C_node4, C_network5, C_node5 = forward_prop_5(test_image, CW1, CB1, CW2, CB2, CW3, CB3, CW4, CB4, CW5, CB5, sigmoid, ReLU, sigmoid, ReLU)
 
-	DW1 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/W1.npy")
-	DB1 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/B1.npy")
-	DW2 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/W2.npy")
-	DB2 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/B2.npy")
-	DW3 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/W3.npy")
-	DB3 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/B3.npy")
-	DW4 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/W4.npy")
-	DB4 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/B4.npy")
-	DW5 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/W5.npy")
-	DB5 = np.load("EMNIST/200S-166S-133S-100S-62SM_80%/B5.npy")
+	DW1 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/W1.npy")
+	DB1 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/B1.npy")
+	DW2 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/W2.npy")
+	DB2 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/B2.npy")
+	DW3 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/W3.npy")
+	DB3 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/B3.npy")
+	DW4 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/W4.npy")
+	DB4 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/B4.npy")
+	DW5 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/W5.npy")
+	DB5 = np.load("EMNIST/EMNIST/200S-166S-133S-100S-62SM_80%/B5.npy")
 
 	D_network1, D_node1, D_network2, D_node2, D_network3, D_node3, D_network4, D_node4, D_network5, D_node5 = forward_prop_5(test_image, DW1, DB1, DW2, DB2, DW3, DB3, DW4, DB4, DW5, DB5, sigmoid, sigmoid, sigmoid, sigmoid)
 
-	EW1 = np.load("EMNIST/120R-100R-62R-62SM_80%/W1.npy")
-	EB1 = np.load("EMNIST/120R-100R-62R-62SM_80%/B1.npy")
-	EW2 = np.load("EMNIST/120R-100R-62R-62SM_80%/W2.npy")
-	EB2 = np.load("EMNIST/120R-100R-62R-62SM_80%/B2.npy")
-	EW3 = np.load("EMNIST/120R-100R-62R-62SM_80%/W3.npy")
-	EB3 = np.load("EMNIST/120R-100R-62R-62SM_80%/B3.npy")
-	EW4 = np.load("EMNIST/120R-100R-62R-62SM_80%/W4.npy")
-	EB4 = np.load("EMNIST/120R-100R-62R-62SM_80%/B4.npy")
+	EW1 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/W1.npy")
+	EB1 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/B1.npy")
+	EW2 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/W2.npy")
+	EB2 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/B2.npy")
+	EW3 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/W3.npy")
+	EB3 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/B3.npy")
+	EW4 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/W4.npy")
+	EB4 = np.load("EMNIST/EMNIST/120R-100R-62R-62SM_80%/B4.npy")
 
 	E_network1, E_node1, E_network2, E_node2, E_network3, E_node3, E_network4, E_node4 = forward_prop_4(test_image, EW1, EB1, EW2, EB2, EW3, EB3, EW4, EB4, ReLU, ReLU, ReLU)
 
-	print(A_node5)
-	print(B_node5)
-	print(C_node5)
-	print(D_node5)
-	print(E_node4)
-	print("result", A_node5 + B_node5 + C_node5 + D_node5 + E_node4)
-	print(np.argmax(A_node5 + B_node5 + C_node5 + D_node5 + E_node4))
+	return parseLabel(np.argmax(A_node5 + B_node5 + C_node5 + D_node5 + E_node4))
 
-	plot_data(tmp.T, test_label, 2)
+	# print(A_node5)
+	# print(B_node5)
+	# print(C_node5)
+	# print(D_node5)
+	# print(E_node4)
+	# print("result", A_node5 + B_node5 + C_node5 + D_node5 + E_node4)
+	# print(np.argmax(A_node5 + B_node5 + C_node5 + D_node5 + E_node4))
+
+	# plot_data(tmp.T, test_label, 2)
 	
+def parseLabel(label):
+	alphabet = ["A","B","C","D","E",
+				"F","G","H","I","J",
+				"K","L","M","N","O",
+				"P","Q","R","S","T",
+				"U","V","W","X","Y",
+				"Z",
+				"a","b","c","d","e",
+				"f","g","h","i","j",
+				"k","l","m","n","o",
+				"p","q","r","s","t",
+				"u","v","w","x","y",
+				"z"] 
+
+	if label > 9:
+		return alphabet[label-10]
+	else :
+		return label
 
 def computerVision():
 
-	cv2.namedWindow("preview")
-	vc = cv2.VideoCapture(0)
+	cv2.namedWindow("A")
+	cv2.namedWindow("B")
+	vc = cv2.VideoCapture(1)
 
 	if vc.isOpened():
 		rval, frame = vc.read()
@@ -478,11 +499,14 @@ def computerVision():
 		rval = False
 
 	while rval:
+
 		h, w, c = frame.shape
 
-		frame = frame[int(h/2-250):int(h/2+250), int(w/2-250):int(w/2+250)]
+		frame = frame[int(h/2-250):int(h/2+250), int(w/2-250):int(w/2+250)] #Image Size modify
 
-		frame = cv2.GaussianBlur(frame,(15,15),4)
+		original = frame
+
+		frame = cv2.GaussianBlur(frame,(15,15),4) #Gaussian Blur
 
 		lab= cv2.cvtColor(frame, cv2.COLOR_BGR2LAB)
 		l_channel, a, b = cv2.split(lab)
@@ -490,26 +514,57 @@ def computerVision():
 		cl = clahe.apply(l_channel)
 		limg = cv2.merge((cl,a,b))
 		enhanced_img = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
-		frame = np.hstack((frame, enhanced_img))
+		# frame = np.hstack((frame, enhanced_img)) #Increase Contrast
+		frame = enhanced_img
 
 		im_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 		(thresh, im_bw) = cv2.threshold(im_gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 		thresh = 127
-		frame = cv2.threshold(im_gray, thresh, 255, cv2.THRESH_BINARY)[1]
+		frame = cv2.threshold(im_gray, thresh, 255, cv2.THRESH_BINARY)[1] #Convert to Black and White Image
 
-		frame = cv2.bitwise_not(frame)
+		frame = cv2.bitwise_not(frame) #Invert Black and White
 
-		small_frame = cv2.resize(frame, (0,0), fx=500/28, fy=500/28, interpolation=cv2.INTER_NEAREST)
+		# frame = cv2.flip(frame, 1)
 
+		small_frame = cv2.resize(frame, (28,28)) #convert to 28*28
 
-		cv2.putText()
+		r,c = small_frame.shape
+		a = 0
+		test_image = []
 
-		cv2.imshow("preview", frame)
+		for i in range(r):
+			for j in range(c):
+				test_image.append(small_frame[j,i]/255)
+				# print(small_frame)
+
+		test_image = np.array([test_image]).T
+
+		# print()
+
+		# plot_data(test_image.T,["A"],0)
+
+		# cv2.imshow("asdf", small_frame)
+
+		# cv2.putText()
+
+		# frame = np.hstack((frame, test_image.reshape((28,28)).T))
+
+		# label = 
+
+		original = cv2.putText(original, "{}".format(test(test_image)), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
+
+		cv2.imshow("A", original)
+		cv2.imshow("B", test_image.reshape((28,28)).T)
+
+		# cv2.imshow("preview", cv2.flip(frame,1))
+		# cv2.imshow("actual image", test_image.reshape((28,28)).T)
 
 		rval, frame = vc.read()
 		key = cv2.waitKey(20)
 		if key == 27:
 			break
+
+		# time.sleep(0.5)
 
 	vc.release()
 	cv2.destroyWindow("preview")
@@ -517,6 +572,6 @@ def computerVision():
 # train() #if you get rid of this, nothing will happen
 # test()
 
-test(None)
+# test(None)
 
-# test()
+computerVision()
